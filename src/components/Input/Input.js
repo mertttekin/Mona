@@ -5,7 +5,7 @@ import styles from './Input.style'
 const Input = ({placeholder,onType,value}) => {
   return (
     <View style={styles.container} >
-      <TextInput placeholder={placeholder} onChangeText={onType} value={value}></TextInput>
+      <TextInput autoCapitalize='none' placeholder={placeholder} onChangeText={onType} value={value}></TextInput>
     </View>
   );
 };
