@@ -5,6 +5,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
+import Record from './pages/Record';
+import FlashMessage from "react-native-flash-message";
 
 // function LoginScreen() {
 //   return (
@@ -21,10 +23,10 @@ function Router() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
-          name="Kayıt"
+          name="SingUp"
           component={SignUp}
           options={{
-            title: 'Records',
+            title: 'SignUp',
             headerStyle: {
               backgroundColor: '#64b5f6',
             },
@@ -42,7 +44,19 @@ function Router() {
             headerTintColor: '#fff',
           }}
         />
+        <Stack.Screen
+          name="Records"
+          component={Record}
+          options={{
+            title: 'Records',
+            headerStyle: {
+              backgroundColor: '#64b5f6',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
       </Stack.Navigator>
+      <FlashMessage position="top"/>
     </NavigationContainer>
   );
 }
