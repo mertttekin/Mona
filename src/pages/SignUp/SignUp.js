@@ -15,38 +15,40 @@ function Login({navigation}) {
   const handleRecords = () => {
     navigation.navigate('Records');
   };
-  const handleFormSubmit = formValues => {
-    if (formValues.password == formValues.passwordConfirm) {
-      auth()
-        .createUserWithEmailAndPassword(formValues.email, formValues.password)
-        .then(() => {
-          console.log('User account created & signed in!');
-          Alert.alert('Hesap Oluşturuldu Giriş Yapabilirsiniz');
-          showMessage({
-            message: 'Giriş Başarılı',
-            type: 'success',
-          });
-          navigation.navigate('Home');
-        })
-        .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            console.log('That email address is already in use!');
-          }
+  async function handleFormSubmit (formValues) {
+    try {
+      if (formValues.password == formValues.passwordConfirm) {
+        await auth()
+          .createUserWithEmailAndPassword(formValues.email, formValues.password)
+          .then(() => {
+            console.log('User account created & signed in!');
+            Alert.alert('Hesap Oluşturuldu Giriş Yapabilirsiniz');
+            showMessage({
+              message: 'Giriş Başarılı',
+              type: 'success',
+            });
+            navigation.navigate('Home');
+          })
+          .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              console.log('That email address is already in use!');
+            }
 
-          if (error.code === 'auth/invalid-email') {
-            console.log('That email address is invalid!');
-          }
-          showMessage({
-            message: authErrorMessageParser(error.code),
-            type: 'danger',
-          });
+            if (error.code === 'auth/invalid-email') {
+              console.log('That email address is invalid!');
+            }
+            showMessage({
+              message: authErrorMessageParser(error.code),
+              type: 'danger',
+            });
 
-          console.error(error);
-        });
-    } else {
-      Alert.alert('Password not Match!');
-    }
-    console.log(formValues);
+            console.error(error);
+          });
+      } else {
+        Alert.alert('Password not Match!');
+      }
+      console.log(formValues);
+    } catch (error) {}
   };
 
   return (
@@ -71,10 +73,12 @@ function Login({navigation}) {
                 value={values.email}
                 onType={handleChange('email')}></Input>
               <Input
+                isSecure
                 placeholder="Enter Your Password"
                 value={values.password}
                 onType={handleChange('password')}></Input>
               <Input
+                isSecure
                 placeholder="Enter Your Password Again"
                 value={values.passwordConfirm}
                 onType={handleChange('passwordConfirm')}></Input>

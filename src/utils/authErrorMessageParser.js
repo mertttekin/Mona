@@ -11,6 +11,9 @@ export default function(errorCode){
         
         case "auth/email-already-in-use":
             return "Bu E-mail Kullanılmaktadır";
+
+        case "auth/wrong-password":
+            return "Bu Parola Geçersiz";
         
     
         default:

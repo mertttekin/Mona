@@ -65,6 +65,7 @@ function Login({navigation}) {
                 value={values.email}
                 onType={handleChange('email')}></Input>
               <Input
+                isSecure
                 placeholder="Enter Your Password"
                 value={values.password}
                 onType={handleChange('password')}></Input>
