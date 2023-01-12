@@ -22,10 +22,7 @@ const Record = () => {
       .ref('records/');
       reference.on('value', snapshot => {
         const contentData = snapshot.val();
-        if (!contentData){
-            return;
-        }
-        const parsedData = parseContentData(contentData);
+        const parsedData = parseContentData(contentData || {});
         console.log(parsedData);
         setContentList(parsedData);
       });
